@@ -36,23 +36,25 @@
     <body>
   <div class="container-fluid">
     <div class="row">
-      
-      <div class="col-md-8" id="affdex_elements" style="width:680px;height:480px;"></div>
+      <br/>
+      <div class="col-md-1"></div>
+    <div class="col-md-8" id="affdex_elements" style="width:672px;height:486px;border-style: solid;"></div>
       <div class="col-md-4">
         <div style="height:25em;">
-          <strong>EMOTION TRACKING RESULTS</strong>
-          <div id="results" style="word-wrap:break-word;"></div>
+          <strong><h3><p style="font-family: 'Comic Sans MS', cursive, sans-serif;">Emotion Tracking Results</p></h3></strong>
+          <h5><p style="font-family: 'Comic Sans MS', cursive, sans-serif;"><div id="results" style="word-wrap:break-word;"></div></p></h5>
         </div>
         <div>
-          <strong>DETECTOR LOG MSGS</strong>
+          <strong><h3><p style="font-family: 'Comic Sans MS', cursive, sans-serif;">Detector Log Messages</p></h3></strong>
         </div>
-        <div id="logs"></div>
+        <h5><p style="font-family: 'Comic Sans MS', cursive, sans-serif;"><div id="logs"></div></p></h5>
       </div>
     </div>
     <div>
-      <button id="start" onclick="onStart()">Start</button>
-      <button id="stop" onclick="onStop()">Stop</button>
-      <button id="reset" onclick="onReset()">Reset</button>
+      <br/>
+      <button id="start" class="btn btn-info" onclick="onStart()">Start</button>
+      <button id="stop" class="btn btn-danger" onclick="onStop()">Stop</button>
+      <button id="reset" class="btn btn-warning" onclick="onReset()">Reset</button>
     </div>
   </div>
  <script>
@@ -180,6 +182,24 @@ function(key, val) {
 <script type="text/javascript">
     window.botplatform.init({});
 </script>
+<script type="text/javascript">
+        setTimeout(function(){
+          url_string = window.location.href
+url = new URL(url_string);
+console.log("SSDD")
+console.log(url)
+    iframe = document.getElementById('ymIframeId');
+    iframe.contentWindow.postMessage(JSON.stringify({event_code: 'ym-client-event', data: JSON.stringify({
+      event: {
+        code: "Firsts",
+        data:{
+          description:url.searchParams.get("name"),
+          },
+          
+      }
+    })}), 'https://chat.botplatform.io');
+  },3000)
+    </script>
 </body>
 
 </html>

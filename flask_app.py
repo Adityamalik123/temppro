@@ -59,11 +59,18 @@ def get_face_data():
 		print url
 		querystring = {"client":"842434154-841F50D273F5F57EA115476C5BA41570", "user":response["RESPONSE"][0]['USER'][0]['VALUE'],
 		"fieldname":"RADIOGENRE"}
-		response = requests.request("GET", url, headers=headers, params=querystring)
-		response1=json.loads(response.text)
+		response1 = requests.request("GET", url, headers=headers, params=querystring)
+		response1=json.loads(response1.text)
 		for i in response1["RESPONSE"][0]['GENRE']:
 			print i
 
+		
+		url = "https://c1234567.web.cddbp.net/webapi/json/1.0/radio/create"
+		print url
+		querystring = {"client":"842434154-841F50D273F5F57EA115476C5BA41570", "user":response["RESPONSE"][0]['USER'][0]['VALUE'],
+		"fieldname":"RADIOGENRE", "genre":response1['RESPONSE'][0]['GENRE'][0]['ID']}
+		responsen = requests.request("GET", url, headers=headers, params=querystring)
+		responsen=json.loads(responsen.text)
 
 		'''API FOR MARVEL COMICS'''
 
@@ -111,7 +118,7 @@ def get_face_data():
 
 
 
-		return render_template('undercreate.html', emotion=emotion, jokes=response3, songs=response1, comics=response2)
+		return render_template('undercreate.html', emotion=emotion, jokes=response3, songs=responsen, comics=response2)
 	return render_template('error404.html')
 
 

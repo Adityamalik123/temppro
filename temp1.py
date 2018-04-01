@@ -23,5 +23,6 @@ headers = {
 response = requests.request("GET", url, headers=headers, params=querystring)
 response=json.loads(response.text)
 for i in response['data']['results']:
-	print i
+	print i['series']['name']
+	print i['thumbnail']['path']
 	print " "

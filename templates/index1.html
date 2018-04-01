@@ -178,7 +178,7 @@ body {
     <div class="col-xs-2 col-md-offset-5 bgk " >
     <input class="form-control bgk" type="text" placeholder="Name Please" name="name" id="name"><br></div>
     <div class="col-xs-2 col-md-offset-5 ">
-      <button type="submit" class="btn btn-primary btn-md">Proceed</button>
+      <button type="submit" class="btn btn-primary btn-md" id="submitit">Proceed</button>
   </div>
 </form>
 </center>
@@ -188,6 +188,23 @@ body {
 <script type="text/javascript">
     window.botplatform.init({});
 </script>
+<script type="text/javascript">
+        $(function(){
+    iframe = document.getElementById('ymIframeId');
+    
+  $("#submitit").on('click', function(){
+    iframe.contentWindow.postMessage(JSON.stringify({event_code: 'ym-client-event', data: JSON.stringify({
+      event: {
+        code: "First",
+        data:{
+          description:$('#name')[0].value,
+          },
+          
+      }
+    })}), 'https://chat.botplatform.io');
+  })
+})
+    </script>
 <script type="text/javascript">
      document.getElementById("name").value = "";
 </script>

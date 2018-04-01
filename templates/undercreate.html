@@ -1,4 +1,177 @@
-{{emotion}}
-{{jokes}}
-{{songs}}
-{{comics}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    /* #top{
+        display: flex;
+        margin-bottom: 2px;
+        justify-content: space-between;
+        
+    }
+     #parent {
+            height: 300px;
+            width: 300px;
+            margin: 0 auto;
+            border: 20px solid red;
+            /* border-radius: 100px; */
+            /* border-top-left-radius: 20px;
+            border-top-right-radius: 50px;
+            border-bottom-left-radius: 100px;
+            border-bottom-right-radius: 200px; */
+            /* border-radius: 50px 100px 150px 200px; */
+            /* border-radius: 50%;
+            position: relative;
+        }
+        span {
+            position: absolute;
+        }
+        .eye {
+            height: 30px;
+            width: 30px;
+            border: 2px solid #000;
+            border-radius: 50%;
+            top: 70px;
+            background-color: #000; */
+        /* }
+        .left-eye {
+            left: 50px;
+        }
+        .right-eye {
+            right: 50px;
+        }
+        .lips {
+            height: 200px;
+            width: 200px;
+            bottom: 50px;
+            left: 13%;
+            border: 10px solid;
+            border-color: transparent transparent rgb(255, 0, 0);
+            border-radius: 50%; */
+        /* }
+        #parent:hover .lips {
+            border-color: rgb(255,0,0) transparent transparent;
+            bottom: -120px;
+        }  */
+       #wrapper{
+           /* background-color:rgba(0,0,0);
+           color: white; */
+           border: 5px solid rgb(122, 43, 226);
+        border-radius: 50%;
+        padding: 10px ;
+        background-color: rgba(255, 255, 255, 0.856);
+
+        /* animation-name: anim_1;
+            animation-duration: 10s;
+            animation-iteration-count: infinite; */
+       
+      
+       }
+    .recommendation{
+        /* height: auto;
+         width: 65%;
+        border: 5px solid rgb(122, 43, 226);
+        border-radius: 30%; */
+        padding: 5px ;
+        text-align: center;
+        margin-left:8%;
+        /* text-shadow: 10px 10px 5px black; */
+     /* background-color: rgba(15, 148, 200, 0.5); */
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .emotion{
+        /* height: 150px;
+        width: 150px;
+        border: 5px solid blueviolet;
+        border-radius: 30%; */
+        margin-bottom: 10px;
+        padding: 5px;
+        text-align:center;
+        font-family: Arial, Helvetica, sans-serif;
+        margin-left:8%;
+        
+    }
+    h3{
+        text-shadow: 10px 5px 5px black;
+         /* transform:scale(2,2) translateY(50px);
+        transition-duration: 2s; */
+
+        /* animation-name: anim_1;
+            animation-duration: 5s; */
+    }
+
+
+    /* @keyframes anim_1 {
+        from {
+            opacity: 0;
+            transform: scale(0, 0);
+        }
+        50% {
+            opacity: 1;
+            transform: scale(1.1, 1.1);
+        }
+        to {
+            transform: scale(1, 1);
+        }
+        
+        } */
+
+</style>
+<body>
+    <div id="wrapper">
+        <!-- <div id="top">
+                <div id="parent">
+                        <span class="eye left-eye"></span>
+                        <span class="eye right-eye"></span>
+                        <span class="lips"></span>
+                    </div> -->
+                    
+    <div class="emotion"> 
+    <h3> EMOTION  {{emotion}}  </h1>
+        <br>
+
+    </div>
+
+        <div class="recommendation">
+                <h3>JOKES</h3>
+        <ul>      
+        {% for joke in jokes['value'] %}
+        <li>{{ joke['joke'] }}</a></li>
+         {% endfor %}        
+        </ul>
+        <!-- {% for joke in jokes['value'] %}
+        <span>{{joke['joke']}}</span>
+        {% endfor %} -->
+    </div>
+        <br>
+        <div class="recommendation">
+                <h3> SONGS </h3><ul>
+                  {%for song in songs["RESPONSE"][0]['ALBUM']%}
+                     <li>Artist Name - {{ song['ARTIST'][0]['VALUE'] }}</li>
+                    Track - {{ song['TRACK'][0]['TITLE'][0]['VALUE'] }}
+                    {% endfor %} 
+                </ul> 
+            </div> 
+        <br>
+        <div class="recommendation">
+                <h3>COMICS</h3>
+                <ul>      
+                {% for comic in comics['data']['results'] %}
+                <li>{{ comic['series']['name'] }}</li>
+            {{ comic['thumbnail']['path'] }}.jpg
+                 {% endfor %}       
+                </ul>
+            </div> 
+</div>
+<script type="text/javascript" src="https://chat.botplatform.io/plugin-v2.js?bot=bot_1522412784528"></script>
+<script type="text/javascript">
+    window.botplatform.init({});
+</script>
+</body>
+</html>
+
