@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Emotion Detection</title>  
+<link rel="icon" type="image/png" href="{{url_for('static', filename = "assetsmain/favicon.ico")}}">
+        
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"> </script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.32/jquery.form.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.11.1/jquery.validate.min.js"></script>
+<style>
+* {box-sizing: border-box;}
+body, html {
+    height: 100%;
+    margin: 0;
+}
+.fieldContainer {
+    position: relative;
+    margin-bottom: 20px;
+}
+::-webkit-input-placeholder {
+   text-align: center;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   text-align: center;  
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   text-align: center;  
+}
+
+:-ms-input-placeholder {  
+   text-align: center; 
+}
+.bgk
+{
+      animation: shake 2s;
+  animation-iteration-count: 2s;
+}
+@keyframes shake {
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  10% { transform: translate(-1px, -2px) rotate(-1deg); }
+  20% { transform: translate(-3px, 0px) rotate(1deg); }
+  30% { transform: translate(3px, 2px) rotate(0deg); }
+  40% { transform: translate(1px, -1px) rotate(1deg); }
+  50% { transform: translate(-1px, 2px) rotate(-1deg); }
+  60% { transform: translate(-3px, 1px) rotate(0deg); }
+  70% { transform: translate(3px, 1px) rotate(-1deg); }
+  80% { transform: translate(-1px, -1px) rotate(1deg); }
+  90% { transform: translate(1px, 2px) rotate(0deg); }
+  100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+.header {
+  overflow: hidden;
+   border-width: 0px;
+    -webkit-box-shadow: 0px 0px;
+    box-shadow: 0px 0px;
+    background-color: rgba(0,0,0,0.0);
+    background-image: -webkit-gradient(linear, 50.00% 0.00%, 50.00% 100.00%, color-stop( 0% , rgba(0,0,0,0.00)),color-stop( 100% , rgba(0,0,0,0.00)));
+    background-image: -webkit-linear-gradient(270deg,rgba(0,0,0,0.00) 0%,rgba(0,0,0,0.00) 100%);
+    background-image: linear-gradient(180deg,rgba(0,0,0,0.00) 0%,rgba(0,0,0,0.00) 100%);
+
+  padding: 20px 10px;
+  font-family: Arial;
+}
+
+.header a {
+  float: left;
+
+  text-align: center;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 14px; 
+  line-height: 25px;
+  border-radius: 4px;
+  color:white;
+}
+
+.header a.logo {
+  font-size: 22px;
+  font-weight: bold;
+  color:white;
+}
+
+.header a:hover {
+  color:white;
+}
+
+.header a.active {
+  background-color: dodgerblue;
+  color: white;
+}
+
+.header-right {
+  float: right;
+  color:white;
+}
+
+.name-mid {
+  color: white;
+  display: inline-block;
+  text-align: center !important;
+}
+label.error {
+    position: relative;
+    right: 0px;
+    top: 0px;
+    left: 0px;
+    border: solid 0px #000;
+    background: #fff;
+    box-shadow: 0px 10px 6px rgba(0, 0, 0, .7);
+    padding: 2px 5px;
+}
+
+
+@media screen and (max-width: 500px) {
+  .header a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+  .header-right {
+    float: none;
+    color:white;
+  }
+
+  .name-mid {
+  float: right;
+  color: white;
+  display: inline-block;
+  position: relative;
+}
+
+h1 {
+    position: relative;
+    top: 100px;
+    left: 200px;
+  }
+
+}
+body {
+      margin: 0;
+  font-family: Arial;
+}
+.bg {
+    /* The image used */
+    background-image: url(/static/assets/images/s{{num}}.jpg);
+
+    /* Full height */
+    height: 100%; 
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+</style>
+</head>
+<body class="bg">
+
+<div class="header">
+  <a href="#default" class="logo">Emotion Detection</a>
+  <div class="header-right">
+    <a href="#about">Know More</a>
+  </div>
+</div>
+<br>
+<center><h1><div class="name-mid">Hi !</div></h1></center>
+<center><h2><div class="name-mid">Get Started by Entering your name </div></h2></center>
+   <center>
+    <form method="GET" action="/Detection" id="check">
+    <div class="col-xs-2 col-md-offset-5 bgk " >
+    <input class="form-control bgk" type="text" placeholder="Name Please" name="name" id="name"><br></div>
+    <div class="col-xs-2 col-md-offset-5 ">
+      <button type="submit" class="btn btn-primary btn-md">Proceed</button>
+  </div>
+</form>
+</center>
+<!--<img src="/static/assets/images/Webp.net-gifmaker.gif" alt="Computer man" style="width:48px;height:48px;"> -->
+
+<script type="text/javascript" src="https://chat.botplatform.io/plugin-v2.js?bot=bot_1522412784528"></script>
+<script type="text/javascript">
+    window.botplatform.init({});
+</script>
+<script type="text/javascript">
+     document.getElementById("name").value = "";
+</script>
+<script type="text/javascript">
+      $(function(){
+        
+
+        $('#check').validate({
+          rules: {
+            name: {
+              required: true,
+              minlength: 3
+            },
+          },
+          
+        
+          });
+      });
+    </script>
+</body>
+</html>
