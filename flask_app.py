@@ -23,12 +23,16 @@ def pagenotfound(error):
 @app.route('/')
 def index():
 	#print request.environ['REMOTE_ADDR']
-	x=random.randint(1,8)
+	x=random.randint(1,13)
 	return render_template('index1.html', num=x)
 
 @app.route('/Detection')
 def detection():
 	return render_template('index.html')
+
+@app.route('/About')
+def about():
+	return render_template('know_more.html')
 
 
 @app.route('/faceData', methods=['POST', 'GET'])
@@ -36,10 +40,9 @@ def get_face_data():
 	
 	if request.method == 'POST':
 
-		'''FIND EMOTION''' 
+		'''FIND EMOTION'''
 		highest= max(request.form['ok[disgust]'], request.form['ok[surprise]'], request.form['ok[valence]'], request.form['ok[fear]'], request.form['ok[anger]'], request.form['ok[sadness]'], request.form['ok[contempt]'], request.form['ok[joy]'])
 		emotion = request.form.keys()[request.form.values().index(highest)].split("ok[")[1].split(']')[0]
-		print emotion
 
 		'''API FOR SONGS'''
 		url = "https://c842434154.web.cddbp.net/webapi/json/1.0/register"
@@ -61,9 +64,6 @@ def get_face_data():
 		"fieldname":"RADIOGENRE"}
 		response1 = requests.request("GET", url, headers=headers, params=querystring)
 		response1=json.loads(response1.text)
-		for i in response1["RESPONSE"][0]['GENRE']:
-			print i
-
 		
 		url = "https://c1234567.web.cddbp.net/webapi/json/1.0/radio/create"
 		print url
@@ -71,6 +71,10 @@ def get_face_data():
 		"fieldname":"RADIOGENRE", "genre":response1['RESPONSE'][0]['GENRE'][0]['ID']}
 		responsen = requests.request("GET", url, headers=headers, params=querystring)
 		responsen=json.loads(responsen.text)
+		last_item = None
+		for resp in responsen["RESPONSE"][0]['ALBUM']:
+			last_item = resp
+
 
 		'''API FOR MARVEL COMICS'''
 
@@ -85,7 +89,7 @@ def get_face_data():
 
 		querystring = {"apikey":publicKey, 
 		"hash":m.hexdigest(),
-		"ts":ts, "limit":3}
+		"ts":ts, "limit":4}
 
 		headers = {
 			'cache-control': "no-cache",
@@ -94,9 +98,7 @@ def get_face_data():
 
 		response2 = requests.request("GET", url, headers=headers, params=querystring)
 		response2=json.loads(response2.text)
-		for i in response2['data']['results']:
-			print i
-			print " "
+		
 
 
 		'''API FOR JOKES'''
@@ -111,14 +113,13 @@ def get_face_data():
 
 		response3 = requests.request("GET", url, headers=headers, params=querystring)
 		response3=json.loads(response3.text)
-		print response3
 
 
 		'''API FOR MOVIES'''
 
 
 
-		return render_template('undercreate.html', emotion=emotion, jokes=response3, songs=responsen, comics=response2)
+		return render_template('undercreate.html', emotion=emotion, jokes=response3, songs=responsen, comics=response2, last=last_item)
 	return render_template('error404.html')
 
 
