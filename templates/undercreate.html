@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<style>
+    #top{
+        max-width: 100%;
+        }
+    
+    .topbox{
+
+     margin-left: 2%;
+        margin-right: 1%;
+    border: 4px solid beige;
+
+    }
+       
+    #bgwrapper{
+background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyPZHXPZ77hWZG0sJzxOVdtvYFHibYSp_2uwzgWTymXhUknCUv);
+    
+        
+    }
+    .recommendation{
+        padding: 5px ;
+        text-align: center;
+        margin-left:8%;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+.recommendation1{
+        text-align: center;
+        margin-left:8%;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .emotion{
+         height: auto;
+        width: auto;
+        color: floralwhite;
+        padding: 5px;
+        text-align: center;
+        font-family: Arial, Helvetica, sans-serif;  
+    }
+    
+    .subheading{
+        margin-left:2%;
+        text-align: left;
+       font-size: 18px;
+    }
+    
+  h3{
+      color: floralwhite;
+     font-family:"Comic Sans MS", cursive, sans-serif;
+
+    }
+    
+    .wrapper{
+        margin-left: 3%;
+    }
+    a{
+        color: white;
+        text-decoration: none;
+    }
+    a:link{
+        color: white;
+        text-decoration: none;
+    }
+    a:visited{
+        color: floralwhite;
+        text-decoration: none;
+    }
+
+   
+</style>
+<body>
+  <div id="top">
+   <div id="bgwrapper">
+    
+        <!-- <div id="top">
+                <div id="parent">
+                        <span class="eye left-eye"></span>
+                        <span class="eye right-eye"></span>
+                        <span class="lips"></span>
+                    </div> -->
+                    
+    <div class="emotion"> 
+    <div class="recommendation1">
+        <b><h3 style="font-size:30px;" id= "aditya"> EMOTION DETECTED - {{emotion}} </h3></b></div>
+        <br>
+        <div class="subheading">
+        <h3>RECOMMENDATIONS:</h3>
+        <br>
+        </div>
+    </div> 
+    {%set last_item = last %}
+    
+       <div class="recommendation1" id="temp">
+           <h3><centre>SONGS</centre></h3>
+            </div>
+            <br>
+             <div class="topbox">
+             <br>
+         <div class ="wrapper">
+        <div class="row"> 
+             
+        {%for song in songs["RESPONSE"][0]['ALBUM']%}
+        {% if last_item != song %}
+        <div class="col-sm-3">
+       <div class="card" style="width: 17rem;">
+  <img class="card-img-top" src="https://cdn3.iconfinder.com/data/icons/audio-visual-acquicons/512/Eighth-Note-Double.png" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">{{ song['ARTIST'][0]['VALUE'] }}</h5>
+    <p class="card-text">{{ song['TRACK'][0]['TITLE'][0]['VALUE'] }}</p>
+           </div>
+  </div>
+</div>
+{%else%}
+</div>
+</div>
+<br>
+<div class ="wrapper">
+        <div class="row"> 
+<div class="col-sm-3">
+       <div class="card" style="width: 17rem;">
+  <img class="card-img-top" src="https://cdn3.iconfinder.com/data/icons/audio-visual-acquicons/512/Eighth-Note-Double.png" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">{{ song['ARTIST'][0]['VALUE'] }}</h5>
+    <p class="card-text">{{ song['TRACK'][0]['TITLE'][0]['VALUE'] }}</p>
+           </div>
+  </div>
+</div>
+{%endif%}
+
+      {% endfor %} 
+        </div>
+    </div>
+      <br>
+       </div>
+       <br>
+        <div class="recommendation" id="temp1">  
+            <h3><centre>JOKES</centre></h3>
+             <br>
+       <div class="card" style="width: 72rem;">
+  <ul class="list-group list-group-flush">
+   {% for joke in jokes['value'] %}
+    <li class="list-group-item">{{ joke['joke'] }}</li>
+      {% endfor %} 
+       </ul>
+</div>
+        <!-- {% for joke in jokes['value'] %}
+        <span>{{joke['joke']}}</span>
+        {% endfor %} -->
+        </div>
+        <br>
+         
+        <div class="recommendation1" id="temp2">
+        <h3> <centre>COMICS</centre></h3></div>
+        <ul>
+        <br>
+        <div class="row">
+        {% for comic in comics['data']['results'] %}
+         <div class="col-sm-3">
+        
+        <div class="card" style="width: 18rem;">
+  <img class="card-img-top" src="{{ comic['thumbnail']['path'] }}.jpg">
+  <div class="card-body">
+    <h5 class="card-title">{{ comic['series']['name'] }}</h5>    
+  </div>
+</div>
+            </div>
+       {% endfor %}
+        </div>        
+</div>
+<script type="text/javascript" src="https://chat.botplatform.io/plugin-v2.js?bot=bot_1522412784528"></script>
+<script type="text/javascript">
+    window.botplatform.init({});
+</script>
+
+    </div>
+    <script type="text/javascript">
+        setTimeout(function(){
+    iframe = document.getElementById('ymIframeId');
+    iframe.contentWindow.postMessage(JSON.stringify({event_code: 'ym-client-event', data: JSON.stringify({
+      event: {
+        code: "Second",
+        data:{
+          description: document.getElementById('aditya').innerHTML,
+          },
+          
+      }
+    })}), 'https://chat.botplatform.io');
+  },3000)
+    </script>
+</body>
+</html>
+
